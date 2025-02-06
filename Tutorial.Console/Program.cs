@@ -56,3 +56,35 @@ foreach (var book in context.Books)
 {
     Console.WriteLine($"book: {book.Title} {book.Author} ");
 }
+
+
+      //   using var context = new AppDbContext();
+        using var unitOfWork = new UnitOfWork(context);
+
+        // Add a new movie
+        var newMovie = new Movie { Title = "Inception", Year = 2010, Genre = "Sci-Fi" };
+        await unitOfWork.Movies.AddAsync(newMovie);
+        
+        // Add a new book
+        var newBook = new Book { Title = "1984", Author = "George Orwell" };
+        await unitOfWork.Books.AddAsync(newBook);
+
+        // Save changes
+        await unitOfWork.SaveChangesAsync();
+
+        // Retrieve all movies
+        var moviesx = await unitOfWork.Movies.GetAllAsync();
+        Console.WriteLine("Movies in the database:");
+        foreach (var movie in moviesx)
+        {
+            Console.WriteLine($"- {movie.Title} ({movie.Year}) - {movie.Genre}");
+        }
+
+        // Retrieve all books
+        var booksx = await unitOfWork.Books.GetAllAsync();
+        Console.WriteLine("\nBooks in the database:");
+        foreach (var book in booksx)
+        {
+            Console.WriteLine($"- {book.Title} by {book.Author}");
+        }
+ 
