@@ -12,11 +12,11 @@ namespace Tutorial.Domain
         public DbSet<Student> Students { get; set; }
         public AppDbContext()
         {
-            
+            Database.EnsureCreated();
         }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
+            Database.EnsureCreated();
 
         }
 
@@ -25,7 +25,7 @@ namespace Tutorial.Domain
             if (!options.IsConfigured)
             {
 
-                options.Equals("Data Source=c:/sqlite/students-2025-02-06.db");
+                options.Equals("Data Source=oop-tutorial-2025-02-06.db");
 
             }
 
