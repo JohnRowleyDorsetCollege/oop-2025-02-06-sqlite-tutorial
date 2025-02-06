@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Microsoft.EntityFrameworkCore;
 using Tutorial.Domain;
+using Tutorial.Domain.Repository;
 
 Console.WriteLine("SQL Lite Tutorial");
 
@@ -11,15 +12,20 @@ var options = new DbContextOptionsBuilder<AppDbContext>()
            .Options;
 
 var context = new AppDbContext(options);
-
+var studentRepository = new StudentRepository(context);
+studentRepository.DeleteAllStudents();
 
 var student1 = new Student() { Name = "Peter", Age = 18 };
 var student2 = new Student() { Name = "Paul", Age = 56 };
 
-Console.WriteLine(student1.Name); // False
+//Console.WriteLine(student1.Name);
 
-context.Students.Add(student1);
-context.Students.Add(student2);
+//context.Students.Add(student1);
+//context.Students.Add(student2);
+
+studentRepository.AddStudent(student1);
+studentRepository.AddStudent(student2);
+
 
 List<Movie> movies = new List<Movie>
 {
