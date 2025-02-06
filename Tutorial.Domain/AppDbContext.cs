@@ -10,6 +10,8 @@ namespace Tutorial.Domain
     public class AppDbContext : DbContext
     {
         public DbSet<Student> Students { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Book> Books { get; set; }  
         public AppDbContext()
         {
             Database.EnsureCreated();
@@ -25,7 +27,7 @@ namespace Tutorial.Domain
             if (!options.IsConfigured)
             {
 
-                options.Equals("Data Source=oop-tutorial-2025-02-06.db");
+                options.Equals("Data Source=c:/sqlite/oop-tutorial-2025-02-06.db");
 
             }
 
